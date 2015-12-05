@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * @author Anuj
@@ -15,7 +16,12 @@ public class IntersectingLines {
 	public static void main(String[] args) {
 		
 		RandomLines r = new RandomLines(lineSegments);
-		System.out.println(r.lines().toString());
+		Line[] lines = r.lines();
+		Arrays.sort(lines);
+		for (int i = 0; i < lines.length; i++) {
+			System.out.println(lines[i].toString());
+		}
+		
 	}
 
 }

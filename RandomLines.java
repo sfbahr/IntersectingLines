@@ -9,7 +9,8 @@ public class RandomLines {
 
 	private Random r;
 	private int numberOfLines = 0;
-	private final int upperBound = 999975;
+	// private final int upperBound = 999975;
+	private final int upperBound = 75;
 
 	/**
 	 * 
@@ -19,19 +20,19 @@ public class RandomLines {
 		this.numberOfLines = numberOfLines;
 	}
 
-	public ArrayList<Line> lines() {
-		ArrayList<Line> lineSegments = new ArrayList<Line>(numberOfLines*2);
-		for (int i = 0; i < numberOfLines; i++) {
+	public Line[] lines() {
+		Line[] lineSegments = new Line[numberOfLines*2];
+		for (int i = 0; i < 2*numberOfLines; i+= 2) {
 			int randomIntX = r.nextInt(upperBound);
 			int randomIntY = r.nextInt(upperBound);
 			Line horizontalLine = new Line(new Point(randomIntX, randomIntY),
 					new Point(randomIntX + 25, randomIntY));
-			lineSegments.add(horizontalLine);
+			lineSegments[i] = horizontalLine;
 			randomIntX = r.nextInt(upperBound);
 			randomIntY = r.nextInt(upperBound);
 			Line verticalLine = new Line(new Point(randomIntX, randomIntY),
 					new Point(randomIntX, randomIntY + 25), true);
-			lineSegments.add(verticalLine);
+			lineSegments[i+1] = verticalLine;
 		}
 		return lineSegments;
 	}

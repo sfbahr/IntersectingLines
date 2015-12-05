@@ -2,7 +2,7 @@
  * @author Anuj
  *
  */
-public class Line {
+public class Line implements Comparable<Line> {
 	
 	private Point lesser;
 	private Point greater;
@@ -49,6 +49,25 @@ public class Line {
 			return "VerticalLine: {" + lesser.toString() + greater.toString() + "}";
 		}
 		return "HorizontalLine: {" + lesser.toString() + greater.toString() + "}";
+	}
+
+	@Override
+	public int compareTo(Line o) {
+		int x = lesser.compareTo(o.getLesser());
+		if (x == 0) {
+			if (vertical && o.getVertical()) {
+				return 0;
+			}
+			else if (vertical) {
+				return 1;
+			}
+			else {
+				return -1;
+			}
+		}
+		else {
+			return x > 0 ? 1 : -1;
+		}
 	}
 	
 }
