@@ -4,35 +4,35 @@
  */
 public class Line {
 	
-	private Point start;
-	private Point end;
+	private Point lesser;
+	private Point greater;
 	private Boolean vertical = false;
 	
 	public Line(Point start, Point end) {
-		setStart(start);
-		setEnd(end);
+		setLesser(start);
+		setGreater(end);
 	}
 	
 	public Line(Point start, Point end, Boolean vertical) {
-		setStart(start);
-		setEnd(end);
+		setLesser(start);
+		setGreater(end);
 		setVertical(vertical);
 	}
 
-	public Point getStart() {
-		return start;
+	public Point getLesser() {
+		return lesser;
 	}
 
-	public void setStart(Point start) {
-		this.start = start;
+	public void setLesser(Point start) {
+		this.lesser = start;
 	}
 
-	public Point getEnd() {
-		return end;
+	public Point getGreater() {
+		return greater;
 	}
 
-	public void setEnd(Point end) {
-		this.end = end;
+	public void setGreater(Point end) {
+		this.greater = end;
 	}
 
 	public Boolean getVertical() {
@@ -41,6 +41,14 @@ public class Line {
 
 	public void setVertical(Boolean vertical) {
 		this.vertical = vertical;
+	}
+	
+	@Override
+	public String toString() {
+		if (vertical) {
+			return "VerticalLine: {" + lesser.toString() + greater.toString() + "}";
+		}
+		return "HorizontalLine: {" + lesser.toString() + greater.toString() + "}";
 	}
 	
 }

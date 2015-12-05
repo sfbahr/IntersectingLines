@@ -30,7 +30,7 @@ public class RandomLines {
 			randomIntX = r.nextInt(upperBound);
 			randomIntY = r.nextInt(upperBound);
 			Line verticalLine = new Line(new Point(randomIntX, randomIntY),
-					new Point(randomIntX + 25, randomIntY));
+					new Point(randomIntX, randomIntY + 25), true);
 			lineSegments.add(verticalLine);
 		}
 		return lineSegments;
