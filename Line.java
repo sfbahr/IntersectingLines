@@ -6,14 +6,14 @@ public class Line implements Comparable<Line> {
 	
 	private Point lesser;
 	private Point greater;
-	private Boolean vertical = false;
+	private boolean vertical = false;
 	
 	public Line(Point start, Point end) {
 		setLesser(start);
 		setGreater(end);
 	}
 	
-	public Line(Point start, Point end, Boolean vertical) {
+	public Line(Point start, Point end, boolean vertical) {
 		setLesser(start);
 		setGreater(end);
 		setVertical(vertical);
@@ -35,11 +35,11 @@ public class Line implements Comparable<Line> {
 		this.greater = end;
 	}
 
-	public Boolean getVertical() {
+	public boolean isVertical() {
 		return vertical;
 	}
 
-	public void setVertical(Boolean vertical) {
+	public void setVertical(boolean vertical) {
 		this.vertical = vertical;
 	}
 	
@@ -55,7 +55,7 @@ public class Line implements Comparable<Line> {
 	public int compareTo(Line o) {
 		int x = lesser.compareTo(o.getLesser());
 		if (x == 0) {
-			if (vertical && o.getVertical()) {
+			if (vertical && o.isVertical()) {
 				return 0;
 			}
 			else if (vertical) {
@@ -68,6 +68,17 @@ public class Line implements Comparable<Line> {
 		else {
 			return x > 0 ? 1 : -1;
 		}
+	}
+	
+	public Point intersect(Line o) {
+		
+		if (isVertical() != o.isVertical()) {
+			return null;
+		}
+		if (isVertical()) {
+			
+		}
+		return null;
 	}
 	
 }

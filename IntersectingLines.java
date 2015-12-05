@@ -18,9 +18,6 @@ public class IntersectingLines {
 		RandomLines r = new RandomLines(lineSegments);
 		Line[] lines = r.lines();
 		Arrays.sort(lines);
-		for (int i = 0; i < lines.length; i++) {
-			System.out.println(lines[i].toString());
-		}
 		
 	}
 
