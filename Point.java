@@ -2,7 +2,7 @@
  * @author Anuj
  *
  */
-public class Point {
+public class Point implements Comparable<Point> {
 	
 	private int x;
 	private int y;
@@ -31,6 +31,16 @@ public class Point {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	@Override
+	public int compareTo(Point o) {
+		if (this.y == o.getY()) {
+			return 0;
+		}
+		else {
+			return this.y > o.getY() ? 1 : -1;
+		}
 	}
 	
 }
