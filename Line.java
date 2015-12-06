@@ -3,16 +3,16 @@
  *
  */
 public class Line implements Comparable<Line> {
-	
+
 	private Point lesser;
 	private Point greater;
 	private boolean vertical = false;
-	
+
 	public Line(Point start, Point end) {
 		setLesser(start);
 		setGreater(end);
 	}
-	
+
 	public Line(Point start, Point end, boolean vertical) {
 		setLesser(start);
 		setGreater(end);
@@ -42,13 +42,15 @@ public class Line implements Comparable<Line> {
 	public void setVertical(boolean vertical) {
 		this.vertical = vertical;
 	}
-	
+
 	@Override
 	public String toString() {
 		if (vertical) {
-			return "VerticalLine: {" + lesser.toString() + greater.toString() + "}";
+			return "VerticalLine: {" + lesser.toString() + greater.toString()
+					+ "}";
 		}
-		return "HorizontalLine: {" + lesser.toString() + greater.toString() + "}";
+		return "HorizontalLine: {" + lesser.toString() + greater.toString()
+				+ "}";
 	}
 
 	@Override
@@ -57,28 +59,40 @@ public class Line implements Comparable<Line> {
 		if (x == 0) {
 			if (vertical && o.isVertical()) {
 				return 0;
-			}
-			else if (vertical) {
+			} else if (vertical) {
 				return 1;
-			}
-			else {
+			} else {
 				return -1;
 			}
-		}
-		else {
+		} else {
 			return x > 0 ? 1 : -1;
 		}
 	}
-	
+
 	public Point intersect(Line o) {
-		
+
 		if (isVertical() != o.isVertical()) {
 			return null;
 		}
-		if (isVertical()) {
-			
+		else if (isVertical()) {
+			int x1 = o.getLesser().getX();
+			int x2 = o.getGreater().getX();
+			int y = o.getLesser().getY();
+			if (x1 <= lesser.getX() && lesser.getX() <= x2
+					&& lesser.getY() <= y && y <= greater.getY()) {
+				return new Point(lesser.getX(), y);
+			}
+		}
+		else {
+			int x = o.getLesser().getX();
+			int y1 = o.getLesser().getY();
+			int y2 = o.getGreater().getY();
+			if (lesser.getX() <= x && x <= greater.getX()
+					&& y1 <= lesser.getY() && lesser.getY() <= y2) {
+				return new Point(x, greater.getY());
+			}
 		}
 		return null;
 	}
-	
+
 }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,8 +8,8 @@ public class RandomLines {
 
 	private Random r;
 	private int numberOfLines = 0;
-	// private final int upperBound = 999975;
-	private final int upperBound = 75;
+	private final int upperBound = 999975;
+	//private final int upperBound = 75;
 
 	/**
 	 * 
