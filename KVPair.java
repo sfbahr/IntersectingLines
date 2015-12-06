@@ -3,64 +3,55 @@
  * @author CS3114 Instructor and TAs
  * @version 9/22/2014
  */
-public class KVPair implements Comparable<KVPair>
+public class KVPair<T extends Comparable<T>> implements Comparable<KVPair<T>>
 {
-    private Handle theKey;
-    private Handle theVal;
+    private T value;
+    private T value2 = null;
 
     /**
      * Constructor
      * @param k the key (first Handle)
      * @param v the value (second Handle)
      */
-    public KVPair(Handle k, Handle v)
+    public KVPair(T value)
     {
-        theKey = k;
-        theVal = v;
+        this.value = value;
     }
 
-    /**
+    public KVPair(T handle, T handle2) {
+		this.value = handle;
+		this.value2 = handle2;
+	}
+
+	/**
      * The magic that lets us compare two KVPairs.
      * KVPairs are all that this knows how to compare against
      * First compare the key field. If they are identical,
      * then break the tie with the value field.
-     * @return the ususal for a comparable (+, 0, -)
+     * @return the usual for a comparable (+, 0, -)
      * @param it the KVPair to compare "this" against
      */
-    public int compareTo(KVPair it)
+    public int compareTo(KVPair<T> it)
     {
-        int compKey = theKey.compareTo(it.key());
-        return compKey == 0 ? theVal.compareTo(it.value()) : compKey;
+    	int firstComp = value.compareTo(it.getValue());
+    	if (firstComp == 0 && value2 != null) {
+    		return value2.compareTo(it.getValue2());
+    	}
+    	return firstComp;
     }
 
-    /**
-     * Compare a KVPair to a Handle, by comparing theKey to the
-     * Handle's position.
-     * Note that this relies on Handle having a compareTo method.
-     * @return the ususal for a comparable (+, 0, -)
-     * @param it the Handle to compare "this" against
-     */
-    public int compareTo(Handle it)
-    {
-        return theKey.compareTo(it);
-    }
 
     /**
-     * Getter for "key" Handle
-     * @return the key
+     * Getter for "vertLine"
+     * @return the vertLine
      */
-    public Handle key()
+    public T getValue()
     {
-        return theKey;
+        return value;
     }
-
-    /**
-     * Getter for "value" Handle
-     * @return the value
-     */
-    public Handle value()
-    {
-        return theVal;
+    
+    public T getValue2() {
+    	return value2;
     }
 
     /**
@@ -69,6 +60,9 @@ public class KVPair implements Comparable<KVPair>
      */
     public String toString()
     {
-        return theKey.toString() + " " + theVal.toString();
+    	if (value2 != null) {
+    		return value.toString() + " " + value2.toString();
+    	}
+        return value.toString();
     }
 }

@@ -59,114 +59,6 @@ public class BPTree
         print(((BInternalNode) tempRoot).getRightChild(), depth);
     }
 
-    /**
-     * This is the instantiation of the DoublyLinkedList used to
-     * store the values that the B+ tree accesses.
-     *
-     * @param key the Key value
-     * @return the correct pair to the DoublyLinkedList
-     */
-    public DoublyLinkedList<Handle> list(Handle key)
-    {
-        KVPair start = new KVPair(key, new Handle(-1));
-        DoublyLinkedList<KVPair> pairList = list(start, root);
-        return pairListToValueList(pairList);
-    }
-
-    /**
-     * This methods takes the Key/Value pairs and stores the Values
-     * in the list at the correct location.
-     *
-     * @param pairList the list for the pair values
-     * @return the new value list
-     */
-    private DoublyLinkedList<Handle> pairListToValueList(
-        DoublyLinkedList<KVPair> pairList)
-    {
-        DoublyLinkedList<Handle> valueList = new DoublyLinkedList<Handle>();
-        if (pairList == null)
-        {
-            return valueList;
-        }
-        pairList.moveToFront();
-        for (int i = 0; i < pairList.getSize(); i++)
-        {
-            valueList.insertAfterCurrent(pairList.getCurrent().value()).next();
-            pairList.next();
-        }
-        return valueList;
-    }
-
-    /**
-     * This method creates the list of Key/Value pairs
-     *
-     * @param start the fist Key/Value pair location
-     * @param tempRoot a temporary root location
-     * @return the correct list
-     */
-    private DoublyLinkedList<KVPair> list(KVPair start, BNode tempRoot)
-    {
-        if (tempRoot == null || start.key() == null)
-        {
-            return null;
-        }
-        if (tempRoot.isLeaf())
-        {
-            /* The key values being searched for are guaranteed to start
-             * either in this leaf or the right sibling's because the
-             * key searched for was immediately before them.
-             */
-            BLeafNode tempLeaf = (BLeafNode) tempRoot;
-            KVPair currentPair = tempLeaf.getLeftKVPair();
-            boolean foundPair = false;
-            for (int i = 0; i < 3; i++)
-            {
-                if (currentPair.compareTo(start.key()) == 0)
-                {
-                    foundPair = true;
-                    break;
-                }
-                currentPair = nextPair(currentPair, tempLeaf);
-                tempLeaf = leafWithPair(currentPair, tempLeaf);
-                if (currentPair == null)
-                {
-                    return null;
-                }
-            }
-            if (!foundPair)
-            {
-                return null;
-            }
-
-            DoublyLinkedList<KVPair> matches = new DoublyLinkedList<KVPair>();
-            while (currentPair.compareTo(start.key()) == 0)
-            {
-                matches.insertAfterCurrent(currentPair).next();
-                currentPair = nextPair(currentPair, tempLeaf);
-                tempLeaf = leafWithPair(currentPair, tempLeaf);
-                if (currentPair == null)
-                {
-                    break;
-                }
-            }
-            return matches;
-        }
-
-        BInternalNode tempInternal = (BInternalNode) tempRoot;
-        if (tempInternal.getLeftKVPair().compareTo(start) > 0)
-        {
-            return list(start, tempInternal.getLeftChild());
-        }
-        else if (tempInternal.getRightKVPair() == null)
-        {
-            return list(start, tempInternal.getMiddleChild());
-        }
-        else if (tempInternal.getRightKVPair().compareTo(start) > 0)
-        {
-            return list(start, tempInternal.getMiddleChild());
-        }
-        return list(start, tempInternal.getRightChild());
-    }
 
     /**
      * This method finds the leaf with the correct Key/Value pair.
@@ -177,7 +69,7 @@ public class BPTree
      * @param tempLeaf the temporary leaf being accessed
      * @return the correct leaf
      */
-    private BLeafNode leafWithPair(KVPair pair, BLeafNode tempLeaf)
+    public BLeafNode leafWithPair(KVPair pair, BLeafNode tempLeaf)
     {
         if (pair == null || tempLeaf == null)
         {
