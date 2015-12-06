@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is the instantiation of the BPTree and all of its helper methods.
  * It handles, insert, delete, underflowed cases and print methods
@@ -87,6 +90,41 @@ public class BPTree
             return tempLeaf.getNext();
         }
         return null;
+    }
+    
+    public ArrayList<Point> findRange(BNode currentNode, int lowerBound, int upperBound)
+    {
+    	if (!currentNode.isLeaf())//internal
+    	{
+    		BInternalNode currentInternal = (BInternalNode)currentNode;
+    		KVPair<VerticalLine> left = currentInternal.getLeftKVPair();
+    		KVPair<VerticalLine> right = currentInternal.getRightKVPair();
+    		if (left.getValue().getX() > lowerBound)
+    		{
+    			return findRange(currentInternal.getLeftChild(), lowerBound, upperBound);
+    		}
+    		else if (right == null)
+    		{
+    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound);
+    		}
+    		else if (right.getValue().getX() > lowerBound)
+    		{
+    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound);
+    		}
+    		else
+    		{
+    			return findRange(currentInternal.getRightChild(), lowerBound, upperBound);
+    		}
+    	}
+    	else//leaf
+    	{
+    		List<Point> intersections = new ArrayList<Point>();
+    		BLeafNode currentLeaf = (BLeafNode)currentNode;
+    		while (currentLeaf != null)
+    		{
+    			
+    		}
+    	}
     }
 
     /**

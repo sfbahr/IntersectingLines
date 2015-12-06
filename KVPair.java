@@ -3,7 +3,7 @@
  * @author CS3114 Instructor and TAs
  * @version 9/22/2014
  */
-public class KVPair<T extends Comparable<T>> implements Comparable<KVPair<T>>
+public class KVPair<T extends Comparable<? super T>> implements Comparable<KVPair<T>>
 {
     private T value;
     private T value2 = null;
@@ -50,7 +50,8 @@ public class KVPair<T extends Comparable<T>> implements Comparable<KVPair<T>>
         return value;
     }
     
-    public T getValue2() {
+    public T getValue2()
+    {
     	return value2;
     }
 
@@ -64,5 +65,10 @@ public class KVPair<T extends Comparable<T>> implements Comparable<KVPair<T>>
     		return value.toString() + " " + value2.toString();
     	}
         return value.toString();
+    }
+    
+    public int getX()
+    {
+    	return ((VerticalLine) value).getX();
     }
 }

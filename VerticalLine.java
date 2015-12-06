@@ -2,7 +2,7 @@
  * @author Anuj
  *
  */
-public class VerticalLine extends Line{
+public class VerticalLine extends Line {
 
 	public VerticalLine(Point start, Point end, Boolean vertical) {
 		super(start, end, vertical);
@@ -19,4 +19,7 @@ public class VerticalLine extends Line{
 		return -1;
 	}
 
+	public int getX() {
+		return this.getLesser().getX();
+	}
 }
