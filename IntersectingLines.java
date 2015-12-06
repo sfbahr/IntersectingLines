@@ -17,7 +17,7 @@ public class IntersectingLines {
 		for (int i = 0; i < lineSegments.length; i++) {
 			RandomLines r = new RandomLines(lineSegments[i]);
 			Line[] lines = r.lines();
-
+			
 			// Brute Force
 			long startTime1 = System.currentTimeMillis();
 			BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(lines);
