@@ -92,7 +92,7 @@ public class BPTree
         return null;
     }
     
-    public ArrayList<Point> findRange(BNode currentNode, int lowerBound, int upperBound)
+    public List<Point> findRange(BNode currentNode, int lowerBound, int upperBound, int y)
     {
     	if (!currentNode.isLeaf())//internal
     	{
@@ -101,19 +101,19 @@ public class BPTree
     		KVPair<VerticalLine> right = currentInternal.getRightKVPair();
     		if (left.getValue().getX() > lowerBound)
     		{
-    			return findRange(currentInternal.getLeftChild(), lowerBound, upperBound);
+    			return findRange(currentInternal.getLeftChild(), lowerBound, upperBound, y);
     		}
     		else if (right == null)
     		{
-    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound);
+    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound, y);
     		}
     		else if (right.getValue().getX() > lowerBound)
     		{
-    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound);
+    			return findRange(currentInternal.getMiddleChild(), lowerBound, upperBound, y);
     		}
     		else
     		{
-    			return findRange(currentInternal.getRightChild(), lowerBound, upperBound);
+    			return findRange(currentInternal.getRightChild(), lowerBound, upperBound, y);
     		}
     	}
     	else//leaf
@@ -122,8 +122,26 @@ public class BPTree
     		BLeafNode currentLeaf = (BLeafNode)currentNode;
     		while (currentLeaf != null)
     		{
-    			
+    			KVPair<VerticalLine> left = currentLeaf.getLeftKVPair();
+        		KVPair<VerticalLine> right = currentLeaf.getRightKVPair();
+        		if (left.getValue().getX() >= lowerBound && left.getValue().getX() <= upperBound)
+        		{
+        			intersections.add(new Point(left.getValue().getX(), y));
+        		}
+        		if (right != null && right.getValue().getX() >= lowerBound && right.getValue().getX() <= upperBound)
+        		{
+        			intersections.add(new Point(right.getValue().getX(), y));
+        		}
+        		if (right != null && right.getValue().getX() > upperBound)
+        		{
+        			return intersections;
+        		}
+        		else
+        		{
+        			currentLeaf = currentLeaf.getNext();
+        		}
     		}
+    		return intersections;
     	}
     }
 
