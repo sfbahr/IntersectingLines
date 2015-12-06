@@ -71,7 +71,7 @@ public class Line implements Comparable<Line> {
 
 	public Point intersect(Line o) {
 
-		if (isVertical() != o.isVertical()) {
+		if (isVertical() == o.isVertical()) {
 			return null;
 		}
 		else if (isVertical()) {
