@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Anuj
+ * @author Anuj, Sam, and sometimes Max
  *
  */
 public class IntersectingLines {
@@ -24,8 +24,9 @@ public class IntersectingLines {
 			Result res2 = proposedAlgorithm(lines);
 			long totalTime2 = res2.getTotalTime();
 			
-			System.out.println(lineSegments[i] + "\t\t\t" + totalTime1 + "\t\t\t\t"
-					+ res1.getIntersections() + res2.getIntersections());
+			System.out.println(lineSegments[i] + "\t\t\t" + totalTime1 + "\t\t"
+					+ totalTime2 + "\t\t" + 
+					res1.getIntersections() + res2.getIntersections());
 			
 		}		
 	}
@@ -41,8 +42,8 @@ public class IntersectingLines {
 	private static Result proposedAlgorithm(Line[] lines) {
 		long startTime = System.currentTimeMillis();
 		Arrays.sort(lines);
-		//meat
-		List<Point> intersections = null;
+		ProposedAlgorithm proposed = new ProposedAlgorithm(lines);
+		List<Point> intersections = proposed.findIntersects();
 		long endTime = System.currentTimeMillis();
 		return new Result(endTime - startTime, intersections);
 	}
