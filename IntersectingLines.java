@@ -21,11 +21,6 @@ public class IntersectingLines {
 			Result res1 = bruteForce(lines);
 			long totalTime1 = res1.getTotalTime();
 			
-			long startSortTime = System.currentTimeMillis();
-			Arrays.sort(lines);
-			long endSortTime = System.currentTimeMillis();
-			long sortTime = startSortTime - endSortTime;
-			
 			Result res2 = proposedAlgorithm(lines);
 			long totalTime2 = res2.getTotalTime();
 			
@@ -45,6 +40,7 @@ public class IntersectingLines {
 	
 	private static Result proposedAlgorithm(Line[] lines) {
 		long startTime = System.currentTimeMillis();
+		Arrays.sort(lines);
 		//meat
 		List<Point> intersections = null;
 		long endTime = System.currentTimeMillis();
