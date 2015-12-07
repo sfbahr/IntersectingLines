@@ -433,15 +433,15 @@ public class BPTreeTest extends TestCase
     
     public void testFindRange()
     {
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(5, 10), new Point(5, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(8, 10), new Point(8, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(3, 10), new Point(3, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(15, 10), new Point(15, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(17, 10), new Point(17, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 10), new Point(9, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 11), new Point(9, 36), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
-    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(5, 10), new Point(5, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(8, 10), new Point(8, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(3, 10), new Point(3, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(15, 10), new Point(15, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(17, 10), new Point(17, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 10), new Point(9, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 11), new Point(9, 36), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
+    	tree.insertWithDupes(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
     	tree.print();    	
     	
     	List<Point> intersections = tree.findRange(5, 15, 20);
