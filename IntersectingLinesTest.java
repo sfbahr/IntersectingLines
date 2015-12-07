@@ -39,8 +39,8 @@ public class IntersectingLinesTest {
 		intersectionsBF = bruteForce.findIntersects();
 		
 		Arrays.sort(lines);
-		// meat
-		intersectionsP = null;
+		ProposedAlgorithm proposed = new ProposedAlgorithm(lines);
+		intersectionsP = proposed.findIntersects();
 		
 		horizontalLine3 = new Line(new Point(0, 25), new Point(25, 25));
 		horizontalLine4 = new Line(new Point(10, 25), new Point(35, 25));
