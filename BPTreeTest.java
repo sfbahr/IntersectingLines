@@ -439,8 +439,10 @@ public class BPTreeTest extends TestCase
     	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(15, 10), new Point(15, 35), true)));
     	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(17, 10), new Point(17, 35), true)));
     	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 10), new Point(9, 35), true)));
-    	
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 11), new Point(9, 36), true)));
     	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
+    	tree.print();    	
     	
     	List<Point> intersections = tree.findRange(5, 15, 20);
     	assertTrue(intersections.contains(new Point(5, 20)));
@@ -448,7 +450,7 @@ public class BPTreeTest extends TestCase
     	assertTrue(intersections.contains(new Point(8, 20)));
     	assertTrue(intersections.contains(new Point(9, 20)));
     	assertTrue(intersections.contains(new Point(15, 20)));
-    	assertEquals(intersections.size(), 5);
+    	assertEquals(intersections.size(), 7);
     }
 }
 
