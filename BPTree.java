@@ -15,6 +15,7 @@ public class BPTree
     private BNode root;
     private boolean insertSuccess;
     private boolean deleteSuccess;
+    private boolean dupes;
 
     // ----------------------------------------------------------
     /**
@@ -23,6 +24,13 @@ public class BPTree
     public BPTree()
     {
         root = null;
+        dupes = false;
+    }
+    
+    public BPTree(boolean dupes)
+    {
+    	root = null;
+    	this.dupes = dupes;
     }
 
     /**
@@ -207,15 +215,8 @@ public class BPTree
     public boolean insert(KVPair newPair)
     {
         insertSuccess = true;
-        root = insert(newPair, root, false);
+        root = insert(newPair, root);
         return insertSuccess;
-    }
-    
-    public boolean insertWithDupes(KVPair newPair)
-    {
-    	insertSuccess = true;
-    	root = insert(newPair, root, true);
-    	return insertSuccess;
     }
 
     /**
@@ -226,7 +227,7 @@ public class BPTree
      * @param tempRoot a temporary root
      * @return the new tree state
      */
-    private BNode insert(KVPair newPair, BNode tempRoot, boolean dupes)
+    private BNode insert(KVPair newPair, BNode tempRoot)
     {
         if (tempRoot == null)
         {
@@ -299,7 +300,7 @@ public class BPTree
         BInternalNode tempInternal = (BInternalNode) tempRoot;
         if (tempInternal.getLeftKVPair().compareTo(newPair) > 0)
         {
-            BNode returnedRoot = insert(newPair, tempInternal.getLeftChild(), dupes);
+            BNode returnedRoot = insert(newPair, tempInternal.getLeftChild());
             if (returnedRoot.isLeaf() ||
                 !((BInternalNode) returnedRoot).isPromoted())
             {
@@ -311,7 +312,7 @@ public class BPTree
         }
         else if (tempInternal.getRightKVPair() == null)
         {
-            BNode returnedRoot = insert(newPair, tempInternal.getMiddleChild(), dupes);
+            BNode returnedRoot = insert(newPair, tempInternal.getMiddleChild());
             if (returnedRoot.isLeaf() ||
                 !((BInternalNode) returnedRoot).isPromoted())
             {
@@ -323,7 +324,7 @@ public class BPTree
         }
         else if (tempInternal.getRightKVPair().compareTo(newPair) > 0)
         {
-            BNode returnedRoot = insert(newPair, tempInternal.getMiddleChild(), dupes);
+            BNode returnedRoot = insert(newPair, tempInternal.getMiddleChild());
             if (returnedRoot.isLeaf() ||
                 !((BInternalNode) returnedRoot).isPromoted())
             {
@@ -333,7 +334,7 @@ public class BPTree
             return handlePromotedNode(tempInternal,
                 (BInternalNode) returnedRoot);
         }
-        BNode returnedRoot = insert(newPair, tempInternal.getRightChild(), dupes);
+        BNode returnedRoot = insert(newPair, tempInternal.getRightChild());
         if (returnedRoot.isLeaf() ||
             !((BInternalNode) returnedRoot).isPromoted())
         {
