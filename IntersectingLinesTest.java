@@ -3,7 +3,6 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -64,6 +63,38 @@ public class IntersectingLinesTest {
 	@Test
 	public void testProposed() {
 		assertEquals(intersectionsP.toString(), "[(11, 2), (11, 2)]");
+	}
+	
+	public void testOverapVertical() {
+		Line horizontalLine1 = new Line(new Point(0, 30), new Point(25, 30));
+		Line horizontalLine2 = new Line(new Point(0, 100), new Point(25, 100));
+		Line verticalLine1 = new Line(new Point(10, 25), new Point(10, 50), true);
+		Line verticalLine2 = new Line(new Point(10, 30), new Point(10, 55), true);
+		
+		Line[] lines = {horizontalLine1, horizontalLine2, verticalLine1, verticalLine2};
+		Line[] lines2 = {horizontalLine1, verticalLine1};
+		
+		// Brute Force
+		// With 4 lines
+		BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(lines);
+		List<Point> intersectionsBF = bruteForce.findIntersects();
+		assertEquals(intersectionsBF.toString(), "[(10, 30), (10, 30)]");
+		// With 2 lines
+		BruteForceAlgorithm bruteForce2 = new BruteForceAlgorithm(lines2);
+		List<Point> intersectionsBF2 = bruteForce2.findIntersects();
+		assertEquals(intersectionsBF2.toString(), "[(10, 30)]");
+		
+		// Proposed
+		// With 4 lines is currently failing
+		Arrays.sort(lines);
+		ProposedAlgorithm proposed = new ProposedAlgorithm(lines);
+		List<Point> intersectionsP = proposed.findIntersects();
+		assertEquals(intersectionsP.toString(), "[(10, 30), (10, 30)]");
+		// With 2 Lines is currently giving array out of bounds error
+		Arrays.sort(lines2);
+		ProposedAlgorithm proposed2 = new ProposedAlgorithm(lines2);
+		List<Point> intersectionsP2 = proposed2.findIntersects();
+		assertEquals(intersectionsP2.toString(), "[(10, 30)]");
 	}
 	
 	@Test
