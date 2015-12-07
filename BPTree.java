@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -118,21 +118,24 @@ public class BPTree
     	}
     	else//leaf
     	{
-    		List<Point> intersections = new ArrayList<Point>();
+    		List<Point> intersections = new LinkedList<Point>();
     		BLeafNode currentLeaf = (BLeafNode)currentNode;
     		while (currentLeaf != null)
     		{
-    			KVPair<VerticalLine> left = currentLeaf.getLeftKVPair();
-        		KVPair<VerticalLine> right = currentLeaf.getRightKVPair();
-        		if (left.getValue().getX() >= lowerBound && left.getValue().getX() <= upperBound)
-        		{
-        			intersections.add(new Point(left.getValue().getX(), y));
+    			int leftX = ((KVPair<VerticalLine>) currentLeaf.getLeftKVPair().getValue()).getX();
+        		Integer rightX = null;
+        		if (currentLeaf.getRightKVPair() != null) {
+        			rightX = ((KVPair<VerticalLine>) currentLeaf.getRightKVPair().getValue()).getX();
         		}
-        		if (right != null && right.getValue().getX() >= lowerBound && right.getValue().getX() <= upperBound)
+        		if (leftX >= lowerBound && leftX <= upperBound)
         		{
-        			intersections.add(new Point(right.getValue().getX(), y));
+        			intersections.add(new Point(leftX, y));
         		}
-        		if (right != null && right.getValue().getX() > upperBound)
+        		if (rightX != null && rightX >= lowerBound && rightX <= upperBound)
+        		{
+        			intersections.add(new Point(rightX, y));
+        		}
+        		if (rightX != null && rightX > upperBound)
         		{
         			return intersections;
         		}
