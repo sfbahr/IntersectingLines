@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Anuj, Sam, and sometimes Max
+ * @author Anuj, Sam, and Max
  *
  */
 public class IntersectingLines {
