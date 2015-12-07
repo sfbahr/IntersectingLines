@@ -107,6 +107,9 @@ public class BPTree
     
     private List<Point> findRange(BNode currentNode, int lowerBound, int upperBound, int y)
     {
+    	if (currentNode == null) {
+    		return new LinkedList<Point>();
+    	}
     	if (!currentNode.isLeaf())//internal
     	{
     		BInternalNode currentInternal = (BInternalNode)currentNode;
