@@ -8,6 +8,10 @@ public class VerticalLine extends Line {
 		super(start, end, vertical);
 	}
 	
+	public VerticalLine(Line line) {
+		super(line.getLesser(), line.getGreater(), true);
+	}
+	
 	@Override
 	public int compareTo(Line o) {
 		if (this.getLesser().getX() == o.getLesser().getX()) {
