@@ -92,7 +92,12 @@ public class BPTree
         return null;
     }
     
-    public List<Point> findRange(BNode currentNode, int lowerBound, int upperBound, int y)
+    public List<Point> findRange(int lowerBound, int upperBound, int y)
+    {
+    	return findRange(this.root, lowerBound, upperBound, y);
+    }
+    
+    private List<Point> findRange(BNode currentNode, int lowerBound, int upperBound, int y)
     {
     	if (!currentNode.isLeaf())//internal
     	{
@@ -122,10 +127,10 @@ public class BPTree
     		BLeafNode currentLeaf = (BLeafNode)currentNode;
     		while (currentLeaf != null)
     		{
-    			int leftX = ((KVPair<VerticalLine>) currentLeaf.getLeftKVPair().getValue()).getX();
+    			int leftX = ((KVPair<VerticalLine>) currentLeaf.getLeftKVPair()).getValue().getX();
         		Integer rightX = null;
         		if (currentLeaf.getRightKVPair() != null) {
-        			rightX = ((KVPair<VerticalLine>) currentLeaf.getRightKVPair().getValue()).getX();
+        			rightX = ((KVPair<VerticalLine>) currentLeaf.getRightKVPair()).getValue().getX();
         		}
         		if (leftX >= lowerBound && leftX <= upperBound)
         		{

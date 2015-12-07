@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 import student.TestCase;
@@ -428,6 +429,26 @@ public class BPTreeTest extends TestCase
         tree.print();
         assertEquals(correct, systemOut().getHistory());
         systemOut().clearHistory();
+    }
+    
+    public void testFindRange()
+    {
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(5, 10), new Point(5, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(8, 10), new Point(8, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(3, 10), new Point(3, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(15, 10), new Point(15, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(17, 10), new Point(17, 35), true)));
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(9, 10), new Point(9, 35), true)));
+    	
+    	tree.insert(new KVPair<VerticalLine>(new VerticalLine(new Point(6, 10), new Point(6, 35), true)));
+    	
+    	List<Point> intersections = tree.findRange(5, 15, 20);
+    	assertTrue(intersections.contains(new Point(5, 20)));
+    	assertTrue(intersections.contains(new Point(6, 20)));
+    	assertTrue(intersections.contains(new Point(8, 20)));
+    	assertTrue(intersections.contains(new Point(9, 20)));
+    	assertTrue(intersections.contains(new Point(15, 20)));
+    	assertEquals(intersections.size(), 5);
     }
 }
 

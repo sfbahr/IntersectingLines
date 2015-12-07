@@ -44,6 +44,13 @@ public class Point implements Comparable<Point> {
 	}
 	
 	@Override
+	public boolean equals(Object o) {
+		if (o != null && o instanceof Point)
+			return (this.compareTo((Point)o) == 0);
+		return false;
+	}
+	
+	@Override
 	public String toString() {
 		return "(" + x + ", " + y + ")";
 	}
