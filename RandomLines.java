@@ -8,7 +8,7 @@ public class RandomLines {
 
 	private Random r;
 	private int numberOfLines = 0;
-	private final int upperBound = 999975;
+	private final int upperBound = 99900;
 	//private final int upperBound = 100000;
 
 	/**
@@ -25,12 +25,12 @@ public class RandomLines {
 			int randomIntX = r.nextInt(upperBound);
 			int randomIntY = r.nextInt(upperBound);
 			Line horizontalLine = new Line(new Point(randomIntX, randomIntY),
-					new Point(randomIntX + 25, randomIntY));
+					new Point(randomIntX + 100, randomIntY));
 			lineSegments[i] = horizontalLine;
 			randomIntX = r.nextInt(upperBound);
 			randomIntY = r.nextInt(upperBound);
 			Line verticalLine = new Line(new Point(randomIntX, randomIntY),
-					new Point(randomIntX, randomIntY + 25), true);
+					new Point(randomIntX, randomIntY + 100), true);
 			lineSegments[i+1] = verticalLine;
 		}
 		return lineSegments;
