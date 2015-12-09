@@ -86,12 +86,10 @@ public class IntersectingLinesTest {
 		
 		// Proposed
 		// With 4 lines is currently failing
-		Arrays.sort(lines);
 		ProposedAlgorithm proposed = new ProposedAlgorithm(lines);
 		List<Point> intersectionsP = proposed.findIntersects();
 		assertEquals(intersectionsP.toString(), "[(10, 30), (10, 30)]");
 		// With 2 Lines is currently giving array out of bounds error
-		Arrays.sort(lines2);
 		ProposedAlgorithm proposed2 = new ProposedAlgorithm(lines2);
 		List<Point> intersectionsP2 = proposed2.findIntersects();
 		assertEquals(intersectionsP2.toString(), "[(10, 30)]");

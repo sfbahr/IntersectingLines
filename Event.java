@@ -17,7 +17,16 @@ public class Event implements Comparable<Event>{
 
 	@Override
 	public int compareTo(Event e) {
-		return y - e.getY();
+		int comp = y - e.getY();
+		if (comp == 0) {
+			if (isVertical && !e.isVertical()) {
+				return -1;
+			}
+			else if (!isVertical && e.isVertical()) {
+				return 1;
+			}
+		}
+		return comp;
 	}
 	
 	public Line getLine() {
