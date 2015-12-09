@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,6 +30,28 @@ public class IntersectingLines {
 					res1.getIntersections() + res2.getIntersections());
 			
 		}		
+	}
+	
+	private static boolean containsDuplicate(Result r) {
+		List<Point> pointList = r.getIntersections();
+		Point[] points = (Point[]) pointList.toArray();
+		for (int i = 0; i < points.length; i++) {
+			for (int j = i + 1; j < points.length; j++) {
+				if (points[i].getX() == points[j].getX() && points[i].getY() == points[j].getY())
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	private static boolean containsDuplicate(Line[] lines) {
+		for (int i = 0; i < lines.length; i++) {
+			for (int j = i + 1; j < lines.length; j++) {
+				if (lines[i].isVertical() && lines[j].isVertical() && lines[i].getGreater().getX() == lines[j].getGreater().getX())
+					return true;
+			}
+		}
+		return false;
 	}
 	
 	private static Result bruteForce(Line[] lines) {
