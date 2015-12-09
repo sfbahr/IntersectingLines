@@ -22,7 +22,7 @@ public class IntersectingLines {
 			Result res1 = bruteForce(lines);
 			long totalTime1 = res1.getTotalTime();
 			
-			Result res2 = proposedAlgorithm(lines);
+			Result res2 = proposedAlgorithm(lines, containsDuplicate(res1));
 			long totalTime2 = res2.getTotalTime();
 			
 			System.out.println(lineSegments[i] + "\t\t\t" + totalTime1 + "\t\t"
@@ -34,7 +34,8 @@ public class IntersectingLines {
 	
 	private static boolean containsDuplicate(Result r) {
 		List<Point> pointList = r.getIntersections();
-		Point[] points = (Point[]) pointList.toArray();
+		Point[] points = new Point[pointList.size()];
+		points = pointList.toArray(points);
 		for (int i = 0; i < points.length; i++) {
 			for (int j = i + 1; j < points.length; j++) {
 				if (points[i].getX() == points[j].getX() && points[i].getY() == points[j].getY())
@@ -62,10 +63,10 @@ public class IntersectingLines {
 		return new Result(endTime - startTime, intersections);
 	}
 	
-	private static Result proposedAlgorithm(Line[] lines) {
+	private static Result proposedAlgorithm(Line[] lines, boolean hasDupes) {
 		long startTime = System.currentTimeMillis();
 		Arrays.sort(lines);
-		ProposedAlgorithm proposed = new ProposedAlgorithm(lines);
+		ProposedAlgorithm proposed = new ProposedAlgorithm(lines, hasDupes);
 		List<Point> intersections = proposed.findIntersects();
 		long endTime = System.currentTimeMillis();
 		return new Result(endTime - startTime, intersections);

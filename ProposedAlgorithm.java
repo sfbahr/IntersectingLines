@@ -7,7 +7,11 @@ public class ProposedAlgorithm {
 	private Event[] events;
 	
 	public ProposedAlgorithm(Line[] lines) {
-		this.tree = new BPTree(true);
+		this(lines, true);
+	}
+	
+	public ProposedAlgorithm(Line[] lines, boolean hasDupes) {
+		this.tree = new BPTree(hasDupes);
 		this.events = createEvents(lines);
 		Arrays.sort(events);
 	}
