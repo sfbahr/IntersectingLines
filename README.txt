@@ -36,7 +36,7 @@ implementation consists of the files:
 -KVPair
 
 Since that B+ tree was hardcoded to use KVPairs, we modified KVPairs to be a
-more generic wrapper that can holder either one or two objects as long as they
+more generic wrapper that can hold either one or two objects as long as they
 implement Comparable. In this way, we store VerticalLines in the BPTree wrapped
 inside of KVPairs.
 
