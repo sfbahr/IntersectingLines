@@ -23,6 +23,15 @@ The files written exclusively for this project are:
 -Point
 -Result
 
+
+Execution:
+A runnable jar file is included that can be run with the command:
+java -jar IntersectingLines.jar
+
+That output should be redirected to a file to prevent flooding the
+terminal with intersection points.
+
+
 Tree Implementation:
 We used Samuel's B+ Tree from 3114 for our tree implementation. That B+
 implementation consists of the files:
